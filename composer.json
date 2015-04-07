@@ -1,0 +1,23 @@
+{
+    "name":"hellofuture/customforms",
+    "type":"cms",
+    "description":"Custom forms for your php website",
+    "license":"MIT",
+    "authors":[
+        {
+            "name":"hellofuture"
+        }
+    ],
+    "require":{
+        "php":">=5.3.0",
+        "slim/slim":"2.*",
+        "slim/views":"0.1.*",
+        "illuminate/database":"*",
+        "twig/twig":"1.*"
+    },
+    "autoload":{
+        "psr-0":{
+            "": ""
+        }
+    }
+}

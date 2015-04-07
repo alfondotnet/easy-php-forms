@@ -1,0 +1,13 @@
+{% extends "layout/layout.html" %}
+{% block content %}
+<h1>Listing</h1>
+<div class="row">
+
+    <div class="col-lg-12">
+    {% for f in forms %}
+        {{ f }}
+    {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
