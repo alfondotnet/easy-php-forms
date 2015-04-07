@@ -4,9 +4,9 @@ $app->get('/listing', function () use ($app) {
     
     $c = array();
 
-    $form = new models\Form();
+    $forms = models\Form::all();
 
-    $c['forms'] = array();
+    $c['forms'] = $forms;
 
     $app->render('pages/listing.html', $c);
 

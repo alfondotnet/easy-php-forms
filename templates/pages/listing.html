@@ -2,12 +2,27 @@
 {% block content %}
 <h1>Listing</h1>
 <div class="row">
-
     <div class="col-lg-12">
-    {% for f in forms %}
-        {{ f }}
-    {% endfor %}
-    </div>
+        <div class="panel panel-default">
 
+              <div class="panel-heading">Forms</div>
+
+              <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Responses</th>
+                    <th>Actions</th>
+                </tr>
+                {% for f in forms %}
+                <tr>
+                    <td>{{ f.form_name }}</td>
+                    <td>{{ f.responses }}</td>
+                    <td>Edit</td>
+                </tr>
+                {% endfor %}
+              </table>
+
+        </div>  
+    </div>
 </div>
 {% endblock %}
