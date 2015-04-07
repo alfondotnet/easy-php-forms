@@ -10,7 +10,7 @@ $app->get('/listing', function () use ($app) {
     // associated to each form
     foreach ($forms as $f)
     {
-       $f['responses'] = $f->getResponses($f->form_id);
+       $f['responses'] = $f->getResponses($f->id);
        $c['forms'][] = $f;
     }
 

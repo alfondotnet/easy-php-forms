@@ -17,7 +17,7 @@
                 <tr>
                     <td>{{ f.form_name }}</td>
                     <td>{{ f.responses }}</td>
-                    <td>Edit</td>
+                    <td><a href="/form/edit/{{ f.id }}">Edit</a></td>
                 </tr>
                 {% endfor %}
               </table>

@@ -12,6 +12,11 @@ class Form extends \Illuminate\Database\Eloquent\Model {
         return DB::table("responses_{$form_id}")->count();
     }
 
+    public function fields()
+    {
+        return $this->hasMany('models\Field');
+    }
+
     public function toArray()
     {
         $array = parent::toArray();
