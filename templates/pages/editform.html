@@ -1,0 +1,66 @@
+{% extends "layout/layout.html" %}
+{% block content %}
+<h1>Edit form</h1>
+
+<div class="row">
+    <div class="col-lg-12">
+  
+             <h3>General details</h3>
+
+             <form class="form-horizontal">
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="form_name">Name</label>
+                  <div class="col-sm-10">
+                    {{ field_generator.text('form_name',form.form_name, 'Name of the form')|raw }}
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="form_name">Date of creation</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static">{{ form.created_at }}</p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="form_name">Date of last modification</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static">{{ form.updated_at }}</p>
+                  </div>
+                </div>
+
+
+                </div>
+             </form>
+
+             <h3>Contacts</h3>
+
+             <form class="form-horizontal">
+              {% for c in contacts %}
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="{{ c.contact_name }}">{{ c.contact_name }}</label>
+                  <div class="col-sm-10">
+                    {{ field_generator.text(c.id)|raw }}
+                  </div>
+                </div>
+              {% endfor %}
+             </form>
+
+
+             <h3>Fields</h3>
+
+              <form class="form-horizontal">
+              {% for f in fields %}
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="{{ f.field_name }}">{{ f.field_name }}</label>
+                  <div class="col-sm-10">
+                    {{ field_generator.text(f.field_name)|raw }}
+                  </div>
+                </div>
+              {% endfor %}
+              </form>
+          
+    </div>
+</div>
+{% endblock %}
