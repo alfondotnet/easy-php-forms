@@ -6,10 +6,9 @@
 
 <div class="row">
 
-  
              <h3>General details</h3>
 
-             <form class="form-horizontal" action="/form/edit/{{ form.id }}/general">
+             <form method="post" class="form-horizontal" action="/form/edit/{{ form.id }}/general">
 
                 <div class="form-group">
                   <label class="col-sm-2 control-label" for="form_name">Name</label>
@@ -43,7 +42,7 @@
 
              <h3>Contacts</h3>
 
-             <form class="form-horizontal" action="/form/edit/{{ form.id }}/contacts">
+             <form method="post"  class="form-horizontal" action="/form/edit/{{ form.id }}/contacts">
               {% for c in contacts %}
                 <h4>Contact #{{ loop.index0+1 }}</h4>
 
@@ -67,6 +66,7 @@
                   <label class="col-sm-2 control-label" for="submit_contacts"></label>
                   <div class="col-sm-10">
                     <input id="submit_contacts" type="submit" value="Edit contacts" />
+                    <a href="/form/edit/{{ form.id }}/contacts/add">Add new contact</a>
                   </div>
                 </div>
               
@@ -75,18 +75,41 @@
 
              <h3>Fields</h3>
 
-              <form class="form-horizontal" action="/form/edit/{{ form.id }}/fields">
+              <form method="post"  class="form-horizontal" action="/form/edit/{{ form.id }}/fields">
 
 
               {% for f in fields %}
 
-              <h4>Field {{ forloop.count }}</h4>
+              <h4>Field #{{ loop.index0+1 }}</h4>
+
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="{{ f.field_name }}">{{ f.field_name }}</label>
+                  <label class="col-sm-2 control-label" for="field_name">Name of the field</label>
                   <div class="col-sm-10">
-                    {{ field_generator.text(f.field_name)|raw }}
+                    {{ field_generator.text('field_name_' ~ f.id,f.field_name,'A fancy name of for the field', '')|raw }}
                   </div>
                 </div>
+
+                {# ==== Type of the field section ==== #}
+                
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="field_type">Type of the field</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static">{{ f.getTypeString() }}</p>
+                  </div>
+                </div>
+
+                
+                
+                {# ==== End of type of the field section ==== #}
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="field_name">Placeholder</label>
+                  <div class="col-sm-10">
+                    {{ field_generator.text('placeholder_' ~ f.id,f.placeholder,'This will be the placeholder for the field')|raw }}
+                  </div>
+                </div>
+
+
               {% endfor %}
 
 

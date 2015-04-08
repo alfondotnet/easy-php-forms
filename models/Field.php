@@ -12,6 +12,17 @@ class Field extends \Illuminate\Database\Eloquent\Model {
         return $this->belongsTo('Form');
     }
 
+    public function type()
+    {
+        return $this->belongsTo('models\Type');
+    }
+
+    public function getTypeString()
+    {
+        $type = Type::find($this->type_id);
+        return $type->name;
+    }
+
     public function toArray()
     {
         $array = parent::toArray();

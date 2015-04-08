@@ -1,0 +1,49 @@
+{% extends "layout/layout.html" %}
+{% block content %}
+
+<a href="/">Back to listing</a>
+<h1>New form</h1>
+
+<div class="row">
+
+             <h3>Number of fields</h3>
+
+             <form class="form-horizontal" action="#">
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="form_name">Number of fields</label>
+                  <div class="col-sm-10">
+                    <input id="number_fields" type="number" />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="submit_general"></label>
+                  <div class="col-sm-10">
+                    <button id="submit_general" type="submit" onclick="addFields();" />
+                      Generate fields
+                    </button>
+                  </div>
+                </div>
+                
+             </form>
+
+             <h3>New fields</h3>
+
+              <form method="post"  class="form-horizontal" action="/form/new">
+              
+                <div id="field_dynamic_container">
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="submit_fields"></label>
+                  <div class="col-sm-10">
+                    <input id="submit_fields" type="submit" value="Add form" disabled="disabled" />
+                  </div>
+                </div>
+
+
+              </form>
+        
+</div>
+{% endblock %}

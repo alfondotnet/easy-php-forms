@@ -22,6 +22,12 @@ class Form extends \Illuminate\Database\Eloquent\Model {
         return $this->belongsToMany('models\Contact');
     }
 
+
+    public function save(array $options = array()) 
+    {
+        parent::save($options);
+    }
+
     public function toArray()
     {
         $array = parent::toArray();
