@@ -1,13 +1,15 @@
 {% extends "layout/layout.html" %}
 {% block content %}
+
+<a href="/">Back to listing</a>
 <h1>Edit form</h1>
 
 <div class="row">
-    <div class="col-lg-12">
+
   
              <h3>General details</h3>
 
-             <form class="form-horizontal">
+             <form class="form-horizontal" action="/form/edit/{{ form.id }}/general">
 
                 <div class="form-group">
                   <label class="col-sm-2 control-label" for="form_name">Name</label>
@@ -30,28 +32,55 @@
                   </div>
                 </div>
 
-
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="submit_general"></label>
+                  <div class="col-sm-10">
+                    <input id="submit_general" type="submit" value="Edit general details" />
+                  </div>
                 </div>
+                
              </form>
 
              <h3>Contacts</h3>
 
-             <form class="form-horizontal">
+             <form class="form-horizontal" action="/form/edit/{{ form.id }}/contacts">
               {% for c in contacts %}
+                <h4>Contact #{{ loop.index0+1 }}</h4>
+
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="{{ c.contact_name }}">{{ c.contact_name }}</label>
+                  <label class="col-sm-2 control-label" for="contact_name">Contact name</label>
                   <div class="col-sm-10">
-                    {{ field_generator.text(c.id)|raw }}
+                    {{ field_generator.text('contact_name_' ~ c.id,c.contact_name,'Name of the contact')|raw }}
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="{{ c.contact_email }}">Contact e-mail</label>
+                  <div class="col-sm-10">
+                    {{ field_generator.text('contact_email_' ~ c.id,c.contact_email,'e-mail address of the contact')|raw }}
                   </div>
                 </div>
               {% endfor %}
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="submit_contacts"></label>
+                  <div class="col-sm-10">
+                    <input id="submit_contacts" type="submit" value="Edit contacts" />
+                  </div>
+                </div>
+              
              </form>
 
 
              <h3>Fields</h3>
 
-              <form class="form-horizontal">
+              <form class="form-horizontal" action="/form/edit/{{ form.id }}/fields">
+
+
               {% for f in fields %}
+
+              <h4>Field {{ forloop.count }}</h4>
                 <div class="form-group">
                   <label class="col-sm-2 control-label" for="{{ f.field_name }}">{{ f.field_name }}</label>
                   <div class="col-sm-10">
@@ -59,6 +88,16 @@
                   </div>
                 </div>
               {% endfor %}
+
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="submit_fields"></label>
+                  <div class="col-sm-10">
+                    <input id="submit_fields" type="submit" value="Edit fields" />
+                  </div>
+                </div>
+
+
               </form>
           
     </div>

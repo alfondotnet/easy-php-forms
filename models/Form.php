@@ -17,6 +17,11 @@ class Form extends \Illuminate\Database\Eloquent\Model {
         return $this->hasMany('models\Field');
     }
 
+    public function contacts()
+    {
+        return $this->belongsToMany('models\Contact');
+    }
+
     public function toArray()
     {
         $array = parent::toArray();

@@ -7,19 +7,24 @@
 
               <div class="panel-heading">Forms</div>
 
-              <table class="table">
+              <table class="table table-hover">
+                <thead>
                 <tr>
                     <th>Name</th>
                     <th>Responses</th>
                     <th>Actions</th>
                 </tr>
+                </thead>
+                <tbody>
                 {% for f in forms %}
                 <tr>
                     <td>{{ f.form_name }}</td>
                     <td>{{ f.responses }}</td>
-                    <td><a href="/form/edit/{{ f.id }}">Edit</a></td>
+                    <td><a href="/form/edit/{{ f.id }}">Edit form</a></td>
+                    <td><a href="/form/responses/{{ f.id }}">View responses</a></td>
                 </tr>
                 {% endfor %}
+                </tbody>
               </table>
 
         </div>  
