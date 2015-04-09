@@ -292,10 +292,12 @@ $app->post('/form/edit/:id/general', function ($id) use ($app) {
     $c = array();
 
     $form_name = $app->request()->post('form_name');
-    
+    $redirect = $app->request()->post('redirect');
+
     // We edit the form
     $form = models\Form::find($id);
     $form->form_name = $form_name;
+    $form->redirect = $redirect;
     $form->save();
     
     $app->redirect('/form/edit/'. $id);
@@ -373,3 +375,5 @@ $app->post('/form/edit/:id/fields', function ($id) use ($app) {
     $app->redirect('/form/edit/'. $id);
 
 });
+
+
