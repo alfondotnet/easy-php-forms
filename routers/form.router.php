@@ -36,10 +36,10 @@ $app->get('/form/edit/:id', function ($id) use ($app) {
 });
 
 
-// /form/edit/:id controller
-// Edit Form controller
-// When accessing /form/edit/:id via GET,
-// the from edition will be rendered
+// /form/edit/:id/contacts/add controller
+// Contacts add controller
+// When accessing /form/edit/:id/contacts/add via GET,
+// a new contact is created for that forms
 
 $app->get('/form/edit/:id/contacts/add', function ($id) use ($app) {
     
@@ -57,6 +57,28 @@ $app->get('/form/edit/:id/contacts/add', function ($id) use ($app) {
 
     $app->redirect('/form/edit/'. $id);
 });
+
+
+// /form/edit/:id_form/contacts/remove/:id_contact controller
+// Contacts add controller
+// When accessing /form/edit/:id/contacts/add via GET,
+// a new contact is created for that forms
+// TODO: check integrity in the relationship
+
+$app->get('/form/edit/:id_form/contacts/remove/:id_contact', function ($id_form,$id_contact) use ($app) {
+    
+    $c = array();
+
+    // First we have to find the contact
+    $contact = models\Contact::find($id_contact);
+    
+    // Detach it from the pivot table and remove it
+    $contact->form()->detach($id_form);
+    $contact->delete();
+
+    $app->redirect('/form/edit/'. $id_form);
+});
+
 
 
 // /form/new controller

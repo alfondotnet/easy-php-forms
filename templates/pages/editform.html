@@ -44,7 +44,7 @@
 
              <form method="post"  class="form-horizontal" action="/form/edit/{{ form.id }}/contacts">
               {% for c in contacts %}
-                <h4>Contact #{{ loop.index0+1 }}</h4>
+                <h4>Contact #{{ loop.index0+1 }} - <a href="/form/edit/{{ form.id }}/contacts/remove/{{ c.id }}">Delete contact</a></h4>
 
                 <div class="form-group">
                   <label class="col-sm-2 control-label" for="contact_name">Contact name</label>
