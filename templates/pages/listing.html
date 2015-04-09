@@ -12,6 +12,7 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
+                    <th>Number of fields</th>
                     <th>Responses</th>
                     <th>Actions</th>
                 </tr>
@@ -21,6 +22,7 @@
                 <tr>
                     <td>{{ f.id }}</td>
                     <td>{{ f.form_name }}</td>
+                    <td>{{ f.getNumberFields() }}</td>
                     <td>{{ f.responses }}</td>
                     <td><a href="/form/edit/{{ f.id }}">Edit form</a> 
                     <a href="/form/responses/{{ f.id }}">View responses</a> 

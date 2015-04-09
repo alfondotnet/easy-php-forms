@@ -22,6 +22,10 @@ class Form extends \Illuminate\Database\Eloquent\Model {
         return $this->belongsToMany('models\Contact');
     }
 
+    public function getNumberFields()
+    {
+        return count($this->fields->toArray());
+    }
 
     public function save(array $options = array()) 
     {
