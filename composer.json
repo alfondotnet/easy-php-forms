@@ -14,6 +14,7 @@
         "slim/extras": "dev-feature/no_static_views",
         "slim/views":"0.1.*",
         "illuminate/database":"*",
+        "swiftmailer/swiftmailer":"*",
         "twig/twig":"1.*"
     },
     "autoload":{

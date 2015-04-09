@@ -1,5 +1,7 @@
 <?php
 use generators\DbConversor as DbConversor;
+use lib\Email as Email;
+use lib\Config;
 
 // /submitform/:id controller
 // Submit form controller
@@ -19,6 +21,9 @@ $app->post('/submitform/:id', function ($id) use ($app) {
 
     // We grab its fields
     $fields = $form->fields;
+
+    // We grab its contacts
+    $contacts = $form->contacts;
 
     // We add a response
     $response = new models\ModelBuilder;
@@ -50,6 +55,23 @@ $app->post('/submitform/:id', function ($id) use ($app) {
     }
 
     $response->save();
+
+    // Aaaand, we send emails to all the contacts of that form
+
+    $twig = $app->view()->getEnvironment(); // twig environment
+    $transport = Swift_MailTransport::newInstance(); // Create the Mailer using your created Transport 
+    $mailer = Swift_Mailer::newInstance($transport);
+
+    $parameters = array('form' => $form);
+
+    foreach ($contacts as $contact) {
+
+        $generator = new Email($twig);
+        $message = $generator->getMessage(Config::read('email_template'), $parameters);
+        $message->setTo($contact->contact_email);
+        $mailer->send($message);
+    }
+
 
     $app->redirect($form->redirect);
 
