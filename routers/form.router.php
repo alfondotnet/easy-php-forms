@@ -7,6 +7,11 @@ use Illuminate\Database\Capsule\Manager as DB;
 */
 
 
+// /form/edit/:id controller
+// Edit Form controller
+// When accessing /form/edit/:id via GET,
+// the from edition will be rendered
+
 $app->get('/form/edit/:id', function ($id) use ($app) {
     
     $c = array();
@@ -29,6 +34,30 @@ $app->get('/form/edit/:id', function ($id) use ($app) {
     $app->render('pages/editform.html', $c);
 
 });
+
+
+// /form/edit/:id controller
+// Edit Form controller
+// When accessing /form/edit/:id via GET,
+// the from edition will be rendered
+
+$app->get('/form/edit/:id/contacts/add', function ($id) use ($app) {
+    
+    $c = array();
+
+    // We have to create a new contact and default it
+    $contact = new models\Contact;
+
+    $contact->contact_name = 'New contact';
+    $contact->contact_email = 'new@email.com';
+    $contact->save();
+
+    // We attach the form id to the new form created
+    $contact->form()->attach($id);
+
+    $app->redirect('/form/edit/'. $id);
+});
+
 
 // /form/new controller
 // New Form controller

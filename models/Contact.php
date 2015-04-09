@@ -7,9 +7,9 @@ class Contact extends \Illuminate\Database\Eloquent\Model {
 
     protected $table = 'contacts';
 
-    public function getForm()
+    public function form()
     {
-        return $this->belongsTo('Form');
+        return $this->belongsToMany('models\Form');
     }
 
     public function toArray()
