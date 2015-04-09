@@ -1,4 +1,5 @@
 <?php
+use generators\DbConversor as DbConversor;
 
 // /submitform/:id controller
 // Submit form controller
@@ -12,6 +13,7 @@ $app->post('/submitform/:id', function ($id) use ($app) {
    
     $post_vars = $app->request()->post();
     
+
     // We grab the form
     $form = models\Form::find($id);
 
@@ -36,10 +38,15 @@ $app->post('/submitform/:id', function ($id) use ($app) {
         if ((int)$id_field != $id_field) continue;
 
         // if the field submitted exists within the form's scope
+        $form_field = $fields->find($id_field);
+
         if (!$fields->find($id_field)) continue;
 
         // Now we know $key is valid, we can assign it
-        $response->$key = $var;
+        // We use a helper to assist us in the different use cases we can 
+        // encounter where the type of input we want to create gives as the value in a format
+        // different than we want to store (e.g. Checkbox gives 'on' and we want to store 1)
+        $response->$key = DbConversor::convert($form_field->getTypeString(), $var);
     }
 
     $response->save();

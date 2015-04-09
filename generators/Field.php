@@ -20,7 +20,7 @@ class Field {
     public function checkbox($name, $checked=false, $placeholder='', $html5_attrs='')
     {
         $checked_attr = $checked ? 'checked="checked"' : '';
-        return '<input type="checkbox" '.$checked_attr.'/>';
+        return '<input type="checkbox" name="'. $name .'" '.$checked_attr.'/>';
     }
 
 }
