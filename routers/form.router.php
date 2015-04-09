@@ -165,6 +165,27 @@ $app->get('/form/responses/:id', function ($id) use ($app) {
 });
 
 
+
+// /form/responses/:id_form/delete/:id_response controller
+// Delete responses associated to a form
+
+$app->get('/form/responses/:id_form/delete/:id_response', function ($id_form,$id_response) use ($app) {
+    
+    $c = array();
+
+    // We grab its responses
+    $response = models\ModelBuilder::fromTable('responses_'.$id_form)->find($id_response);
+    $response->delete();
+
+    $app->redirect('/form/responses/'. $id_form);
+
+});
+
+
+
+
+
+
 // /form/render/:id controller
 // Render a form
 // When accessing /form/render/:id via GET,

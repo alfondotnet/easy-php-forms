@@ -30,8 +30,8 @@
 <div class="row">
 
 <div class="response">
+  <h4>Response {{ loop.index0+1 }} <a href="/form/responses/{{ form.id }}/delete/{{ r.id }}">Delete</a></h4>
   <dl class="dl-horizontal">
-
     {% for f in fields %}
       <dt>{{ f.field_name }}</dt>
       <dd>{{ attribute(r,'field_' ~ f.id) }}</dd>
