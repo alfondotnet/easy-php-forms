@@ -133,9 +133,13 @@ $app->post('/form/new', function () use ($app) {
     ADD KEY `form_id` (`form_id`),
     ADD CONSTRAINT `responses_".$form->id."_ibfk_1` FOREIGN KEY (`form_id`) REFERENCES `forms` (`id`);";
 
+    var_dump($create_table_statement);
+    var_dump($add_keys_statement);
 
     DB::raw($create_table_statement);
     DB::raw($add_keys_statement);
+
+    die();
 
     $app->redirect('/form/edit/'. $form->id);
 
