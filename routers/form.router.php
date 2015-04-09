@@ -119,17 +119,17 @@ $app->post('/form/new', function () use ($app) {
 
     $create_table_statement .= '`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,';
     $create_table_statement .= '`updated_at` timestamp NOT NULL DEFAULT \'0000-00-00 00:00:00\',';
-    $create_table_statement .= '`form_id` int(11) NOT NULL';
+    $create_table_statement .= '`form_id` int(11) NOT NULL,';
+    $create_table_statement .= 'primary key(id)';
 
     $create_table_statement = rtrim($create_table_statement, ",");
-    $create_table_statement .= ');';
+    $create_table_statement .= ') ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;';
 
 
     // And now we have to add indexes
 
     $add_keys_statement ="
     ALTER TABLE `responses_".$form->id."`
-    ADD PRIMARY KEY (`id`),
     ADD KEY `form_id` (`form_id`),
     ADD CONSTRAINT `responses_".$form->id."_ibfk_1` FOREIGN KEY (`form_id`) REFERENCES `forms` (`id`);";
 
