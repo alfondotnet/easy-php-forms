@@ -17,8 +17,6 @@ $app->post('/submitform/:id', function ($id) use ($app) {
 
     $response->save();
 
-    die();
-
     $app->redirect($form->redirect);
 
 });
