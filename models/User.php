@@ -3,9 +3,9 @@ namespace models;
 
 use Illuminate\Database\Capsule\Manager as DB;
 
-class Type extends \Illuminate\Database\Eloquent\Model {
+class User extends \Illuminate\Database\Eloquent\Model {
 
-    protected $table = 'types';
+    protected $table = 'users';
 
     public function toArray()
     {

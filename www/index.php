@@ -1,8 +1,7 @@
 <?php
-
+session_start();
 require '../vendor/autoload.php';
 require '../config.php';
-
 
 // We load Slim Extras so we can extend Twig
 
@@ -14,6 +13,9 @@ $app = new \Slim\Slim(array(
     'view' => $twigView,
     'templates.path' => '../templates/',
 ));
+
+// We add the Auth middleware
+$app->add(new \MyMiddleware\Auth());
 
 // We extend TWIG defining generators for the dynamic form fields
 $env = $app->view()->getEnvironment();

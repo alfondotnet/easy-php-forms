@@ -21,7 +21,8 @@
             "": ""
         },
         "classmap": [
-            "models"
+            "models",
+            "middleware"
         ]
     }
 }
