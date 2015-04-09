@@ -1,5 +1,12 @@
 <?php
-// GET index route
+use lib\Config;
+use Illuminate\Database\Capsule\Manager as DB;
+
+/*
+* GET CONTROLLERS
+*/
+
+
 $app->get('/form/edit/:id', function ($id) use ($app) {
     
     $c = array();
@@ -11,10 +18,218 @@ $app->get('/form/edit/:id', function ($id) use ($app) {
     // We grab its contacts
     $contacts = $form->contacts;
 
+    // We grab the different field types
+    $field_types = models\Type::all();
+
     $c['form'] = $form;
     $c['fields'] = $fields;
     $c['contacts'] = $contacts;
-    
+    $c['field_types'] = $field_types;
+
     $app->render('pages/editform.html', $c);
+
+});
+
+// /form/new controller
+// New Form controller
+// When accessing /form/new via GET,
+// a form will be presented to the user to specify number of fields and types
+
+$app->get('/form/new', function () use ($app) {
+    
+    $c = array();
+   
+    // We grab the different field types
+    $field_types = models\Type::all();
+
+    $c['field_types'] = $field_types;
+
+    $app->render('pages/newform.html', $c);
+
+});
+
+
+/*
+* POST CONTROLLERS 
+*/
+
+
+// /form/new/ controller
+// Create new form
+
+
+$app->post('/form/new', function () use ($app) {
+    
+    $c = array();
+
+    $post_vars = $app->request()->post();
+    
+    // We add a new form
+    $form = new models\Form;
+    $form->form_name = 'New form';
+    $form->save();
+
+
+    // We need to create a table responses associated
+    // to each new form created
+    // example 
+    /*
+        CREATE TABLE IF NOT EXISTS `responses_2` (
+          `id` int(11) NOT NULL,
+          `field_1` varchar(100) NOT NULL,
+          `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+          `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+          `form_id` int(11) NOT NULL
+        ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+    */
+
+    $create_table_statement = 'CREATE TABLE IF NOT EXISTS `responses_'. $form->id .'` (';
+    $create_table_statement .= '`id` int(11) NOT NULL AUTO_INCREMENT,';
+
+    // We add the default fields
+    $i = 1;
+    foreach($post_vars as $key=>$var)
+    {
+        // We skip everything that is not a field type
+        // as field lengths for example
+        if (substr($key, 0, 10) != 'field_type') continue;
+        $key_id = end(explode('_',$key));
+
+        // We create the new field
+        $field = new models\Field;
+        $field->field_name = 'New field '.$i;
+        $field->form_id = $form->id;
+        $field->type_id = $var;
+        $field->placeholder = '';
+        $field->length = $app->request()->post('field_length_'. $key_id);
+        $field->save();
+
+        $field_type = models\Type::find($field->type_id);
+
+        // SQL FORMAT
+        // In the database, the SQL format is stored. 
+        // When a size is specified, such as varchar(size), the following format is used
+        // type(**length**), so **length** will be replaced with the actual length, being stored in the Type model
+        $sql_format = str_replace('**length**', $field->length, $field_type->sql_format);
+
+        $create_table_statement .= '`field_'.$field->id.'` '.$sql_format.',';
+
+        $i++;
+    }
+
+    $create_table_statement .= '`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,';
+    $create_table_statement .= '`updated_at` timestamp NOT NULL DEFAULT \'0000-00-00 00:00:00\',';
+    $create_table_statement .= '`form_id` int(11) NOT NULL';
+
+    $create_table_statement = rtrim($create_table_statement, ",");
+    $create_table_statement .= ');';
+
+
+    // And now we have to add indexes
+
+    $add_keys_statement ="
+    ALTER TABLE `responses_".$form->id."`
+    ADD PRIMARY KEY (`id`),
+    ADD KEY `form_id` (`form_id`),
+    ADD CONSTRAINT `responses_".$form->id."_ibfk_1` FOREIGN KEY (`form_id`) REFERENCES `forms` (`id`);";
+
+
+    DB::raw($create_table_statement);
+    DB::raw($add_keys_statement);
+
+    $app->redirect('/form/edit/'. $form->id);
+
+});
+
+
+
+// /form/edit/:id/general controller
+// Edit General controller
+// Name for the form gets updated
+
+$app->post('/form/edit/:id/general', function ($id) use ($app) {
+    
+    $c = array();
+
+    $form_name = $app->request()->post('form_name');
+    
+    // We edit the form
+    $form = models\Form::find($id);
+    $form->form_name = $form_name;
+    $form->save();
+    
+    $app->redirect('/form/edit/'. $id);
+
+});
+
+
+// /form/edit/:id/contacts controller
+// Edit Contacts controller
+// Contact names and emails are updated
+
+$app->post('/form/edit/:id/contacts', function ($id) use ($app) {
+    
+    $c = array();
+    $allowed_field_names = Config::read('contact_form_elements');
+    
+    $post_vars = $app->request()->post();
+    
+    // We iterate through id
+    foreach($post_vars as $key=>$var)
+    {
+        // as keys are name_id
+        $explode = explode('_', $key);
+        $id_contact = array_pop($explode);
+        // column name can be placeholder or field_name
+        $column_name = implode('_',$explode);
+
+        // We try to avoid as possible possible Database mess
+        if(!in_array($column_name,$allowed_field_names))
+            continue;
+
+
+        // We edit the field
+        $contact = models\Contact::find($id_contact);
+        $contact->$column_name = $var;
+        $contact->save();
+    }
+
+    $app->redirect('/form/edit/'. $id);
+
+});
+
+
+// /form/edit/:id/fields controller
+// Edit Fields controller
+// Name and placeholders for the current fields are updated
+// type or number of fields cannot be updated for performance reasons
+
+$app->post('/form/edit/:id/fields', function ($id) use ($app) {
+    
+    $c = array();
+    $allowed_field_names = Config::read('field_form_elements');
+    
+    $post_vars = $app->request()->post();
+    
+    // We iterate through id
+    foreach($post_vars as $key=>$var)
+    {
+        // as keys are name_id
+        $explode = explode('_', $key);
+        $id_field = array_pop($explode);
+        // column name can be placeholder or field_name
+        $column_name = implode('_',$explode);
+
+        // We try to avoid as possible possible Database mess
+        if(!in_array($column_name,$allowed_field_names))
+            continue;
+
+        // We edit the field
+        $field = models\Field::find($id_field);
+        $field->$column_name = $var;
+        $field->save();
+    }
+
+    $app->redirect('/form/edit/'. $id);
 
 });
