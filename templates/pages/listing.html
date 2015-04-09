@@ -22,9 +22,11 @@
                     <td>{{ f.id }}</td>
                     <td>{{ f.form_name }}</td>
                     <td>{{ f.responses }}</td>
-                    <td><a href="/form/edit/{{ f.id }}">Edit form</a></td>
-                    <td><a href="/form/responses/{{ f.id }}">View responses</a></td>
-                    <td><a href="/form/delete/{{ f.id }}">Delete form</a></td>
+                    <td><a href="/form/edit/{{ f.id }}">Edit form</a> 
+                    <a href="/form/responses/{{ f.id }}">View responses</a> 
+                    <a href="/form/delete/{{ f.id }}">Delete form</a>
+                    <a href="/form/render/{{ f.id }}">RenderForm</a>
+                    </td>
                 </tr>
                 {% endfor %}
                 </tbody>

@@ -1,0 +1,21 @@
+<form id="hfform_{{ form.id }}" action="post" method="{{ base_path }}/submitform/{{ form.id }}">
+{% for f in fields %}
+    
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="field_{{ f.id }}">{{ f.field_name }}</label>
+
+        {% if f.getTypeString() == 'text' %}
+            {{ field_generator.text('field_' ~ f.id,'',f.placeholder, '')|raw }}
+        {% elseif f.getTypeString() == 'textarea' %}
+            {{ field_generator.textarea('field_' ~ f.id,'',f.placeholder, '')|raw }}
+        {% elseif f.getTypeString() == 'checkbox' %}
+            {{ field_generator.checkbox('field_' ~ f.id,'',f.placeholder, '')|raw }}
+        {% endif %}
+    </div>
+
+{% endfor %}
+
+    <div class="form-group">
+    <input type="submit" value="Send form" />
+    </div>
+</form>
