@@ -1,0 +1,46 @@
+{% extends "layout/layout.html" %}
+{% block content %}
+
+<a href="/">Back to listing</a>
+<h1>Form responses</h1>
+
+<h3>Form details - <a href="/form/edit/{{ form.id }}">Edit</a></h3>
+<dl class="dl-horizontal">
+  <dt>Form name</dt>
+  <dd>{{ form.form_name }}</dd>
+
+  <dt>Creation date</dt>
+  <dd>{{ form.created_at }}</dd>
+
+  <dt>Modification date</dt>
+  <dd>{{ form.updated_at }}</dd>
+
+  <dt>Contacts</dt>
+  <dd>
+    {% for c in contacts %}
+      <p>{{ c.contact_name }} &lt;{{ c.contact_email }}&gt;</p>
+    {% endfor %}
+  </dd>
+
+</dl>
+
+<h3>Form responses</h3>
+
+{% for r in responses %}
+<div class="row">
+
+<div class="response">
+  <dl class="dl-horizontal">
+
+    {% for f in fields %}
+      <dt>{{ f.field_name }}</dt>
+      <dd>{{ attribute(r,'field_' ~ f.id) }}</dd>
+    {% endfor %}
+  
+  </dl>
+</div>
+
+</div>
+{% endfor %}
+
+{% endblock %}

@@ -100,14 +100,44 @@ $app->get('/form/new', function () use ($app) {
 });
 
 
+
+// /form/responses/:id controller
+// View Form responses controller
+// When accessing /form/responses/:id via GET,
+// a list will be presented to the user with the responses of the form
+
+$app->get('/form/responses/:id', function ($id) use ($app) {
+    
+    $c = array();
+   
+    // We grab the form
+    $form = models\Form::find($id);
+    // We grab its contacts
+    $contacts = $form->contacts;
+    // We grab its fields (will be referenced by their ids on the responses)
+    $fields = $form->fields;
+
+    // We grab its responses
+    $responses = models\ModelBuilder::fromTable('responses_'.$id)->all();
+
+    $c['form'] = $form;
+    $c['responses'] = $responses;
+    $c['contacts'] = $contacts;
+    $c['fields'] = $fields;
+
+    $app->render('pages/responses.html', $c);
+
+});
+
+
+
 /*
 * POST CONTROLLERS 
 */
 
-
 // /form/new/ controller
 // Create new form
-
+// TODO: Use Schema::create
 
 $app->post('/form/new', function () use ($app) {
     
