@@ -11,6 +11,7 @@
               <table class="table table-hover">
                 <thead>
                 <tr>
+                    <th>#</th>
                     <th>Name</th>
                     <th>Responses</th>
                     <th>Actions</th>
@@ -19,10 +20,12 @@
                 <tbody>
                 {% for f in forms %}
                 <tr>
+                    <td>{{ f.id }}</td>
                     <td>{{ f.form_name }}</td>
                     <td>{{ f.responses }}</td>
                     <td><a href="/form/edit/{{ f.id }}">Edit form</a></td>
                     <td><a href="/form/responses/{{ f.id }}">View responses</a></td>
+                    <td><a href="/form/delete/{{ f.id }}">Delete form</a></td>
                 </tr>
                 {% endfor %}
                 </tbody>

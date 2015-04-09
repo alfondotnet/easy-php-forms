@@ -100,6 +100,42 @@ $app->get('/form/new', function () use ($app) {
 });
 
 
+// /form/delete/:id controller
+// Delete Form controller
+// When accessing /form/new via GET,
+// a form will be presented to the user to specify number of fields and types
+// TODO: Use migrations
+
+$app->get('/form/delete/:id', function ($id) use ($app) {
+    
+    $c = array();
+   
+    // We grab the form
+    $form = models\Form::find($id);
+    // First we have to delete it's responses
+    // If we cannot DROP, we out before anything else breaks
+    try{
+        DB::statement('DROP TABLE responses_'. $id);
+    } catch (Illuminate\Database\QueryException $e) {
+        $exp = 'You must grant DROP permissions to your user in order to be able to delete forms';
+        $app->redirect('/error?error='.$e->getMessage().'&exp='.$exp,$c);
+    }
+    
+    // Now we delete the fields
+    $form->fields()->delete();
+    
+    // We delete the contacts
+    $form->contacts()->detach();
+
+    // And we delete the form
+    $form->delete();
+
+    $app->redirect('/', $c);
+
+});
+
+
+
 
 // /form/responses/:id controller
 // View Form responses controller

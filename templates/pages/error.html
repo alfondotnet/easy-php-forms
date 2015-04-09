@@ -1,0 +1,14 @@
+{% extends "layout/layout.html" %}
+{% block content %}
+<a href="/">Back to listing</a>
+<h1>Error</h1>
+<div class="row">
+    <div class="col-lg-12">
+        <h4>An error occured</h4>
+        <p><strong>The error was</strong>: {{ error }}</p>
+        {%if explanation %}
+        <p><strong>Possible explanation</strong>: {{ explanation }} </p> 
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
