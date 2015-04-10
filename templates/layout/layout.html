@@ -11,8 +11,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"> -->
-<link href="/css/bootstrap.min.css" rel="stylesheet">
-<link href="/css/forms.css" rel="stylesheet">
+<link href="{{ base_path }}/css/bootstrap.min.css" rel="stylesheet">
+<link href="{{ base_path }}/css/forms.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
@@ -20,7 +20,7 @@
 {% block content %}{% endblock %}
 </div>
 
-<script src="/js/jquery.min.js"></script>
-<script src="/js/functions_main.js"></script>
+<script src="{{ base_path }}/js/jquery.min.js"></script>
+<script src="{{ base_path }}/js/functions_main.js"></script>
 </body>
 </html>

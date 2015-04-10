@@ -37,5 +37,5 @@ $app->post('/user/login', function () use ($app) {
         $_SESSION['loggedIn'] = true;
 
     $app->redirect($app->urlFor('index'));
-    
+
 });
