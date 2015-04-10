@@ -69,6 +69,8 @@ $app->post('/submitform/:id', function ($id) use ($app) {
         $generator = new Email($twig);
         $message = $generator->getMessage(Config::read('email_template'), $parameters);
         $message->setTo($contact->contact_email);
+        $message->setFrom(Config::read('email_from'));
+
         $mailer->send($message);
     }
 
