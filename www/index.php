@@ -1,12 +1,12 @@
 <?php
-session_start();
-require '../vendor/autoload.php';
-require '../config.php';
+require_once 'bootstrap.php';
+require_once '../vendor/autoload.php';
+require_once '../config.php';
 
 // We load Slim Extras so we can extend Twig
 
-//$twigView = new \Slim\Views\Twig();
-$twigView = new \Slim\Extras\Views\Twig(); 
+$twigView = new \Slim\Views\Twig();
+//$twigView = new \Slim\Extras\Views\Twig(); 
 
 $app = new \Slim\Slim(array(
     'debug' => true,

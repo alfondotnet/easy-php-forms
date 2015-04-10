@@ -90,9 +90,7 @@ $app->post('/submitform/:id', function ($id) use ($app) {
         $mailer->send($message);
 
     }
-
-    die();
-
+    
     $app->redirect($form->redirect);
 
 });
