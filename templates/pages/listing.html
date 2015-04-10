@@ -28,17 +28,17 @@
                     <td>{{ f.form_name }}</td>
                     <td>{{ f.getNumberFields() }}</td>
                     <td>{{ f.responses }}</td>
-                    <td><a href="/form/edit/{{ f.id }}">Edit form</a> 
-                    <a href="/form/responses/{{ f.id }}">View responses</a> 
-                    <a href="/form/delete/{{ f.id }}">Delete form</a>
-                    <a href="/render/{{ f.id }}">RenderForm</a>
+                    <td><a href="{{ base_path }}/index.php/form/edit/{{ f.id }}">Edit form</a> 
+                    <a href="{{ base_path }}/index.php/form/responses/{{ f.id }}">View responses</a> 
+                    <a href="{{ base_path }}/index.php/form/delete/{{ f.id }}">Delete form</a>
+                    <a href="{{ base_path }}/render/{{ f.id }}">RenderForm</a>
                     </td>
                 </tr>
                 {% endfor %}
                 </tbody>
               </table>
         </div>  
-                      <p><a href="/form/new">Add new form</a> · <a href="/user/logout">Logout</a></p>
+                      <p><a href="{{ base_path }}/index.php/form/new">Add new form</a> · <a href="{{ base_path }}/index.php/user/logout">Logout</a></p>
     </div>
 </div>
 {% endblock %}
