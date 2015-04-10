@@ -9,7 +9,7 @@ class Contact extends \Illuminate\Database\Eloquent\Model {
 
     public function form()
     {
-        return $this->belongsToMany('models\Form');
+        return $this->belongsTo('models\Form');
     }
 
     public function toArray()

@@ -50,10 +50,8 @@ $app->get('/form/edit/:id/contacts/add', function ($id) use ($app) {
 
     $contact->contact_name = 'New contact';
     $contact->contact_email = 'new@email.com';
+    $contact->form_id = $id;
     $contact->save();
-
-    // We attach the form id to the new form created
-    $contact->form()->attach($id);
 
     $app->redirect('/form/edit/'. $id);
 });
@@ -125,7 +123,7 @@ $app->get('/form/delete/:id', function ($id) use ($app) {
     $form->fields()->delete();
     
     // We delete the contacts
-    $form->contacts()->detach();
+    $form->contacts()->delete();
 
     // And we delete the form
     $form->delete();

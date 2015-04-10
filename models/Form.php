@@ -19,7 +19,7 @@ class Form extends \Illuminate\Database\Eloquent\Model {
 
     public function contacts()
     {
-        return $this->belongsToMany('models\Contact');
+        return $this->hasMany('models\Contact');
     }
 
     public function getNumberFields()
