@@ -14,6 +14,9 @@ $app = new \Slim\Slim(array(
     'templates.path' => '../templates/',
 ));
 
+// We set the content-type
+$app->contentType('text/html; charset=utf-8');
+
 // We add the Auth middleware
 $app->add(new \MyMiddleware\Auth());
 

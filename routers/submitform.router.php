@@ -57,7 +57,7 @@ $app->post('/submitform/:id', function ($id) use ($app) {
         // encounter where the type of input we want to create gives as the value in a format
         // different than we want to store (e.g. Checkbox gives 'on' and we want to store 1)
         $value_inserted = DbConversor::convert($form_field->getTypeString(), $var);
-        
+
         $response->$key = $value_inserted;
 
         // We also add it to our parameters array for it to be send to the contact by 

@@ -54,6 +54,7 @@ $app->get('/form/edit/:id/contacts/add', function ($id) use ($app) {
     $contact->save();
 
     $app->redirect('/form/edit/'. $id);
+
 });
 
 
@@ -253,7 +254,7 @@ $app->post('/form/new', function () use ($app) {
     $create_table_statement .= 'primary key(id)';
 
     $create_table_statement = rtrim($create_table_statement, ",");
-    $create_table_statement .= ') ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;';
+    $create_table_statement .= ') ENGINE=InnoDB DEFAULT CHARSET=latin1';
 
 
     // And now we have to add indexes
