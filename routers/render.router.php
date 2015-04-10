@@ -23,4 +23,4 @@ $app->get('/render/:id', function ($id) use ($app) {
 
     $app->render('pages/render.html', $c);
 
-});
+})->name('render');
