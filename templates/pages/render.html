@@ -10,6 +10,8 @@
             {{ field_generator.textarea('field_' ~ f.id,'',f.placeholder, '')|raw }}
         {% elseif f.getTypeString() == 'checkbox' %}
             {{ field_generator.checkbox('field_' ~ f.id,'',f.placeholder, '')|raw }}
+        {% elseif f.getTypeString() == 'email' %}
+            {{ field_generator.email('field_' ~ f.id,'',f.placeholder, '')|raw }}
         {% endif %}
     </div>
 
