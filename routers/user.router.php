@@ -12,7 +12,8 @@ $app->get('/user/logout', function () use ($app) {
 
     $c = array();
     unset($_SESSION['loggedIn']);
-    $app->redirect('/');
+
+    $app->redirect($app->urlFor('index'));
 
 })->name('logout');
 
@@ -35,5 +36,6 @@ $app->post('/user/login', function () use ($app) {
     if($valid_user > 0)
         $_SESSION['loggedIn'] = true;
 
-    $app->redirect('/');
+    $app->redirect($app->urlFor('index'));
+    
 });

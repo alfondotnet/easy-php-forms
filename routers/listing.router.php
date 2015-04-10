@@ -16,4 +16,4 @@ $app->get('/listing', function () use ($app) {
 
     $app->render('pages/listing.html', $c);
 
-});
+})->name('listing');

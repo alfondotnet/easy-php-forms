@@ -33,7 +33,7 @@ $app->get('/form/edit/:id', function ($id) use ($app) {
 
     $app->render('pages/editform.html', $c);
 
-});
+})->name('getFormEdit');
 
 
 // /form/edit/:id/contacts/add controller
@@ -53,15 +53,15 @@ $app->get('/form/edit/:id/contacts/add', function ($id) use ($app) {
     $contact->form_id = $id;
     $contact->save();
 
-    $app->redirect('/form/edit/'. $id);
+    $app->redirect($app->urlFor('getFormEdit', array('id' => $id)));
 
-});
+})->name('getFormContactAdd');
 
 
 // /form/edit/:id_form/contacts/remove/:id_contact controller
-// Contacts add controller
+// Contacts remove controller
 // When accessing /form/edit/:id/contacts/add via GET,
-// a new contact is created for that forms
+// a new contact is removed from the form
 // TODO: check integrity in the relationship
 
 $app->get('/form/edit/:id_form/contacts/remove/:id_contact', function ($id_form,$id_contact) use ($app) {
@@ -71,12 +71,11 @@ $app->get('/form/edit/:id_form/contacts/remove/:id_contact', function ($id_form,
     // First we have to find the contact
     $contact = models\Contact::find($id_contact);
     
-    // Detach it from the pivot table and remove it
-    $contact->form()->detach($id_form);
     $contact->delete();
 
-    $app->redirect('/form/edit/'. $id_form);
-});
+    $app->redirect($app->urlFor('getFormEdit', array('id' => $id_form)));
+
+})->name('getFormContactRemove');
 
 
 
@@ -96,7 +95,7 @@ $app->get('/form/new', function () use ($app) {
 
     $app->render('pages/newform.html', $c);
 
-});
+})->name('getFormNew');
 
 
 // /form/delete/:id controller
@@ -117,7 +116,9 @@ $app->get('/form/delete/:id', function ($id) use ($app) {
         DB::statement('DROP TABLE responses_'. $id);
     } catch (Illuminate\Database\QueryException $e) {
         $exp = 'You must grant DROP permissions to your user in order to be able to delete forms';
-        $app->redirect('/error?error='.$e->getMessage().'&exp='.$exp,$c);
+
+        $app->redirect($app->urlFor('error').'?error='.$e->getMessage().'&exp='.$exp,$c);
+
     }
     
     // Now we delete the fields
@@ -129,9 +130,9 @@ $app->get('/form/delete/:id', function ($id) use ($app) {
     // And we delete the form
     $form->delete();
 
-    $app->redirect('/', $c);
+    $app->redirect($app->urlFor('index'));
 
-});
+})->name('getFormDelete');
 
 
 
@@ -161,7 +162,7 @@ $app->get('/form/responses/:id', function ($id) use ($app) {
 
     $app->render('pages/responses.html', $c);
 
-});
+})->name('getFormResponses');
 
 
 
@@ -176,9 +177,9 @@ $app->get('/form/responses/:id_form/delete/:id_response', function ($id_form,$id
     $response = models\ModelBuilder::fromTable('responses_'.$id_form)->find($id_response);
     $response->delete();
 
-    $app->redirect('/form/responses/'. $id_form);
+    $app->redirect($app->urlFor('getFormResponses', array('id' => $id_form)));
 
-});
+})->name('getFormResponseDelete');
 
 
 /*
@@ -267,9 +268,9 @@ $app->post('/form/new', function () use ($app) {
     DB::statement($create_table_statement);
     DB::statement($add_keys_statement);
 
-    $app->redirect('/form/edit/'. $form->id);
+    $app->redirect($app->urlFor('getFormEdit', array('id' => $form->id)));
 
-});
+})->name('postFormNew');
 
 
 
@@ -290,9 +291,9 @@ $app->post('/form/edit/:id/general', function ($id) use ($app) {
     $form->redirect = $redirect;
     $form->save();
     
-    $app->redirect('/form/edit/'. $id);
+    $app->redirect($app->urlFor('getFormEdit', array('id' => $form->id)));
 
-});
+})->name('postFormEdit');
 
 
 // /form/edit/:id/contacts controller
@@ -326,9 +327,9 @@ $app->post('/form/edit/:id/contacts', function ($id) use ($app) {
         $contact->save();
     }
 
-    $app->redirect('/form/edit/'. $id);
+    $app->redirect($app->urlFor('getFormEdit', array('id' => $id)));
 
-});
+})->name('postFormContactEdit');
 
 
 // /form/edit/:id/fields controller
@@ -362,8 +363,8 @@ $app->post('/form/edit/:id/fields', function ($id) use ($app) {
         $field->save();
     }
 
-    $app->redirect('/form/edit/'. $id);
+    $app->redirect($app->urlFor('getFormEdit', array('id' => $id)));
 
-});
+})->name('postFormFieldEdit');
 
 
