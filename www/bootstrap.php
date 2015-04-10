@@ -14,7 +14,7 @@ $twigView = new \Slim\Views\Twig();
 $app = new \Slim\Slim(array(
     'debug' => true,
     'view' => $twigView,
-    'templates.path' => '../templates/',
+    'templates.path' => '../app/templates/',
 ));
 
 // We set the content-type
@@ -32,7 +32,7 @@ $twig->addGlobal('base_path', Config::read('base_path'));
 
 
 // Automatically load router files
-$routers = glob('../routers/*.router.php');
+$routers = glob('../app/routers/*.router.php');
 
 foreach ($routers as $router) {
     require $router;

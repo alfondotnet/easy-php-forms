@@ -29,3 +29,32 @@ function addFields()
     }
 
 }
+
+/*
+* Show the snippet panel in the listing page
+*/
+
+function showSnippet(id, title)
+{
+
+
+    var include_html = '<p>Paste this code in a PHP file:</p>';
+    include_html += '<p>&lt;?php</p>';
+    include_html += '<p>$_hf_form_id = '+ id +';</p>';
+    include_html += '<p>include(\'<strong>directory_of_hfforms</strong>/render_form.php\');</p>';
+    include_html += '<p>?&gt;</p>';
+    // We set up the content
+    $('#snippet_title').html('Include the form <strong>' + title + '</strong> in your project');
+    $('#snippet_body').html(include_html);
+    $('#snippet').fadeIn('fast');
+}
+
+
+
+// Make snippet clickable
+$(function(){
+$('.clickable').on('click',function(){
+    var effect = $(this).data('effect');
+        $(this).closest('.panel')[effect]();
+    })
+})

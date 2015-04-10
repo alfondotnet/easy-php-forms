@@ -5,7 +5,7 @@
     "license":"MIT",
     "authors":[
         {
-            "name":"hellofuture"
+            "name":"Alfonso Perez"
         }
     ],
     "require":{
@@ -22,9 +22,11 @@
             "": ""
         },
         "classmap": [
-            "models",
-            "middleware",
-            "tests"
+            "app/models",
+            "app/middleware",
+            "app/generators",
+            "app/lib",
+            "app/tests"
         ]
     }
 }

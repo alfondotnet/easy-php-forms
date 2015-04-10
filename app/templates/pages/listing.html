@@ -7,9 +7,21 @@
 <h1>Listing of forms</h1>
 <div class="row">
     <div class="col-lg-12">
+
+
+        <div id="snippet" class="panel panel-info" style="display:none">
+            <div class="panel-heading">
+                <h3 id="snippet_title" class="panel-title">Title</h3>
+                <span class="pull-right clickable" data-effect="slideUp"><i class="fa fa-times">Close</i></span>
+            </div>
+            <div id="snippet_body" class="panel-body">
+            </div>
+        </div>  
+
+
         <div class="panel panel-default">
 
-              <div class="panel-heading">Forms</div>
+              <div class="panel-heading">Forms</div> 
 
               <table class="table table-hover">
                 <thead>
@@ -28,10 +40,11 @@
                     <td>{{ f.form_name }}</td>
                     <td>{{ f.getNumberFields() }}</td>
                     <td>{{ f.responses }}</td>
-                    <td><a href="{{ base_path }}/index.php/form/edit/{{ f.id }}">Edit form</a> 
-                    <a href="{{ base_path }}/index.php/form/responses/{{ f.id }}">View responses</a> 
-                    <a href="{{ base_path }}/index.php/form/delete/{{ f.id }}">Delete form</a>
-                    <a href="{{ base_path }}/index.php/render/{{ f.id }}">RenderForm</a>
+                    <td><a href="{{ base_path }}/index.php/form/edit/{{ f.id }}">Edit form</a> ·
+                    <a href="{{ base_path }}/index.php/form/responses/{{ f.id }}">View responses</a> · 
+                    <a href="{{ base_path }}/index.php/form/delete/{{ f.id }}">Delete form</a> ·
+                    <a href="{{ base_path }}/index.php/render/{{ f.id }}">Render Form</a> ·
+                    <a href="#" onclick="javascript:showSnippet('{{ f.id }}','{{ f.form_name }}')">Show include snippet</a>
                     </td>
                 </tr>
                 {% endfor %}
