@@ -1,7 +1,14 @@
 {% block subject 'Form submitted, ' ~ form.form_name %}
 
 {% block body_html %}
-    Hi, a new form has been submitted, following are the details:
+    Hi {{ contact.contact_name }}, a new form has been submitted, following are the details:
+
+{% for k,f in fields %}
+    
+    <p>{{ field_names[k] }} : {{ f }}</p>
+    
+{% endfor %}
+
 {% endblock %}
 
 {% block body_text %}
