@@ -1,7 +1,6 @@
 <?php
 // This file renders a form specified by $_hf_form_id 
-$_hf_form_id = 71;
-if (!isset($_hf_form_id)) die();
+if (!isset($_hf_form_id)) die('$_hf_form_id variable not set');
 
 require_once 'bootstrap.php'; // we require our index file
 
