@@ -3,8 +3,10 @@ use lib\Config as Config;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 /*
+* Project configuration
 * EDITABLE
 */
+
 // Database information
 $settings = array(
     'driver' => 'mysql',
@@ -18,29 +20,38 @@ $settings = array(
     'prefix' => ''
 );
 
-// Project Config
-// omit the trailing '/'
 
-//$base_path = 'http://localhost:9079';
+// Base path of the project (important if you are installing in inside a subdirectory)
 $base_path = '';
 
-// Mails will be sent with these headers
+// Mails will be sent with this address as sender
 $email_from = 'mailer@hellofutu.re';
+
+// Template to use for emails
+// (files are located on app/templates/[name].html)
 $email_template = 'default';
 
+
+/*
+* END EDITABLE
+*/
+
+/*
+* Touch only if you know what you are doing
+*/
+
+// Allowed input element names on fields form (Form edition)
 $field_form_elements = array(
     'field_name',
     'placeholder',
 );
 
+// Allowed input element names on contact form (Form edition)
 $contact_form_elements = array(
     'contact_name',
     'contact_email'
 );
 
-/*
-* END EDITABLE
-*/
 
 Config::write('field_form_elements', $field_form_elements);
 Config::write('contact_form_elements', $contact_form_elements);
