@@ -20,10 +20,8 @@ class Auth extends \Slim\Middleware
         // if the resource is public or private,
         // in that case we ask for login   
 
-
         $explode = explode('/', $this->app->request()->getResourceUri());
         $resource_requested = $explode[1];
-
 
         if (in_array($resource_requested, $this->allowed_resources) ||
             (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']))

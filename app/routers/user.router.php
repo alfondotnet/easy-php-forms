@@ -35,7 +35,7 @@ $app->post('/user/login', function () use ($app) {
 
     if($valid_user > 0)
         $_SESSION['loggedIn'] = true;
-
+    
     $app->redirect($app->urlFor('index'));
 
 });

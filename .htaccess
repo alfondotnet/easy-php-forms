@@ -1,7 +1,7 @@
 # Set environment variable to development
 setEnv APP_ENV development
 
-RewriteEngine On
+#RewriteEngine On
 
 # Some hosts may require you to use the `RewriteBase` directive.
 # If you need to use the `RewriteBase` directive, it should be the

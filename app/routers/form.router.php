@@ -100,8 +100,8 @@ $app->get('/form/new', function () use ($app) {
 
 // /form/delete/:id controller
 // Delete Form controller
-// When accessing /form/new via GET,
-// a form will be presented to the user to specify number of fields and types
+// When accessing /form/delete/:id via GET,
+// the form will be deleted
 // TODO: Use migrations
 
 $app->get('/form/delete/:id', function ($id) use ($app) {
@@ -195,12 +195,17 @@ $app->post('/form/new', function () use ($app) {
     $c = array();
 
     $post_vars = $app->request()->post();
-    
+
+    if (count($post_vars) == 0)
+    {
+        $error = 'When creating a form, you must add at least 1 field';
+        $app->redirect($app->urlFor('error').'?error='.$error);
+    }
+
     // We add a new form
     $form = new models\Form;
     $form->form_name = 'New form';
     $form->save();
-
 
     // We need to create a table responses associated
     // to each new form created
