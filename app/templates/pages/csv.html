@@ -1,0 +1,3 @@
+{% for r in responses %}{% for f in fields %}{{ attribute(r, 'field_' ~ f.id) }},{% endfor %}
+
+{% endfor %}
