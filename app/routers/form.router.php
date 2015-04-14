@@ -165,6 +165,35 @@ $app->get('/form/responses/:id', function ($id) use ($app) {
 })->name('getFormResponses');
 
 
+// /form/responses/:id_form/download/ controller
+// Download responses as csv format
+
+// We create the csv files on the fly
+
+$app->get('/form/responses/:id_form/download', function ($id_form) use ($app) {
+    
+    $c = array();
+
+    // We grab the form
+    $form = models\Form::find($id_form);
+
+    // We grab its fields (will be referenced by their ids on the responses)
+    $fields = $form->fields;
+
+    // We grab its responses
+    $responses = models\ModelBuilder::fromTable('responses_'.$id_form)->all();
+    
+    $c['responses'] = $responses;
+    $c['fields'] = $fields;
+
+    $app->response()->header('Content-Type', 'text/csv');    
+    $app->response()->header('Content-Disposition', 'attachment;filename=form'.$id_form.'_export.csv');    
+
+    $app->render('pages/csv.html', $c);
+
+})->name('getFormResponsesDownload');
+
+
 
 // /form/responses/:id_form/delete/:id_response controller
 // Delete responses associated to a form
@@ -180,6 +209,11 @@ $app->get('/form/responses/:id_form/delete/:id_response', function ($id_form,$id
     $app->redirect($app->urlFor('getFormResponses', array('id' => $id_form)));
 
 })->name('getFormResponseDelete');
+
+
+
+
+
 
 
 /*
