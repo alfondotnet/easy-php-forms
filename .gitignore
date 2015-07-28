@@ -1,0 +1,6 @@
+.vagrant/
+Berksfile.lock
+access.log
+composer.lock
+error.log
+vendor/
