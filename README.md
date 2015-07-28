@@ -7,6 +7,7 @@ comments appreciated.
 # Todo:
 
 - Remove the hardcoded MySQL schema (obviously) and normalize the database properly
+- Refactor everything properly
 - Make a simple installation 
 - User password configuration / reminder
 
