@@ -31,7 +31,7 @@ $port_project = '9079';
 $auth_required = true;
 
 // Mails will be sent with this address as sender
-$email_from = 'mailer@hellofutu.re';
+$email_from = 'your-name@domain';
 
 // Template to use for emails
 // (files are located on app/templates/[name].html)
