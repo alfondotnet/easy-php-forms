@@ -15,12 +15,13 @@ comments appreciated.
 # Dev Env Setup instructions:
 
 1. Clone the repository
-2. vagrant up
-3. mysql -u forms -pforms forms < forms.sql
-4. Go to http://127.0.0.1:9079 on host and that should be it
+2. `vagrant up`
+3. `vagrant ssh`
+4. `mysql -u forms -pforms forms < forms.sql`
+5. Go to http://127.0.0.1:9079 on host and that should be it
 
-5. Lookup config.php
+6. Lookup *config.php*
 
-Password for th web: 
+Password for the web interface: 
 
 root / root
