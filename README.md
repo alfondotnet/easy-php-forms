@@ -34,4 +34,4 @@ This assumes you have installed [Vagrant](http://www.vagrantup.com), a provider 
 
 Default user / password for the web interface: 
 
-    `root / root`
+    root / root
