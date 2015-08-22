@@ -15,10 +15,17 @@ comments appreciated.
 
 # Dev Env Setup instructions:
 
+This assumes you have installed [Vagrant](http://www.vagrantup.com), a provider like [Virtualbox](http://www.virtualbox.org) and:
+
+ - `vagrant plugin install vagrant-omnibus`
+ - `vagrant plugin install vagrant-berkshelf`
+ - [Chef DK](https://downloads.chef.io/chef-dk/)
+
 1. Clone the repository
 2. `vagrant up`
 3. `vagrant ssh`
 4. `mysql -u forms -pforms forms < forms.sql`
+5 (optional): 
 5. Go to http://127.0.0.1:9079 on host and that should be it
 
 6. Lookup *config.php*
