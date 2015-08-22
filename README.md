@@ -1,8 +1,8 @@
 # Easy PHP Forms
 
-This is a dumb project I initially coded for a task.
+This is a little project I initially coded in a few days for a task.
 To get my hands dirty with PHP and Slim Framework, this setting was explored.
-comments appreciated.
+Comments appreciated.
 
 This is still on development, with some glitches so beware!.
 
