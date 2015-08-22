@@ -10,6 +10,7 @@ comments appreciated.
 - Refactor everything properly
 - Make a simple installation 
 - User password configuration / reminder
+- Instructions for installing it
 
 
 # Dev Env Setup instructions:
