@@ -4,7 +4,9 @@ This is a dumb project I initially coded for a task.
 To get my hands dirty with PHP and Slim Framework, this setting was explored.
 comments appreciated.
 
-# Todo:
+This is still on development, with some glitches so beware!.
+
+## Todo:
 
 - Remove the hardcoded MySQL schema (obviously) and normalize the database properly
 - Refactor everything properly
@@ -13,7 +15,7 @@ comments appreciated.
 - Instructions for installing it
 
 
-# Dev Env Setup instructions:
+## Development Environment Setup instructions:
 
 This assumes you have installed [Vagrant](http://www.vagrantup.com), a provider like [Virtualbox](http://www.virtualbox.org) and:
 
