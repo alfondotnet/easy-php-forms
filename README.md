@@ -6,9 +6,9 @@ comments appreciated.
 
 This is still on development, with some glitches so beware!.
 
-## Todo:
+## To do:
 
-- Remove the hardcoded MySQL schema (obviously) and normalize the database properly
+- [Remove the hardcoded MySQL schema (obviously) and normalize the database properly](https://github.com/alfonsoperez/easy-php-forms/issues/1)
 - Refactor everything properly
 - Make a simple installation 
 - User password configuration / reminder
