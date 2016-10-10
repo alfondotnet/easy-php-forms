@@ -4,7 +4,7 @@ This is a little project I initially coded in a few days for a task.
 To get my hands dirty with PHP and Slim Framework, this setting was explored.
 Comments appreciated.
 
-This is still on development, with some glitches so beware!.
+There are tons of glitches, and this is **not** maintained so beware!.
 
 ## To do:
 
